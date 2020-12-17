@@ -1,7 +1,8 @@
 ### This image is built to run on s390x architecture
 -    [build source](https://github.com/korpx-z/postgres)
 -    [original source code](https://github.com/docker-library/postgres)
-###Tags
+
+### Tags
 10, 11, 12, 13
 # PostgreSQL
 ![logo](https://raw.githubusercontent.com/docker-library/docs/01c12653951b2fe592c1f93a13b4e289ada0e3a1/postgres/logo.png)
