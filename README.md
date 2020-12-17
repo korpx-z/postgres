@@ -1,12 +1,11 @@
+###This image is built to run on s390x architecture
+-    [build source](https://github.com/korpx-z/postgres)
+-    [original source code](https://github.com/docker-library/postgres)
+###Tags
+10, 11, 12, 13
+# PostgreSQL
 ![logo](https://raw.githubusercontent.com/docker-library/docs/01c12653951b2fe592c1f93a13b4e289ada0e3a1/postgres/logo.png)
--	[`13`](https://github.com/korpx-z/postgres)  [![Build Status](https://travis-ci.com/korpx-z/postgres.svg?branch=13)](https://travis-ci.com/github/korpx-z/postgres)
--	[`12`](https://github.com/korpx-z/postgres)  [![Build Status](https://travis-ci.com/korpx-z/postgres.svg?branch=12)](https://travis-ci.com/github/korpx-z/postgres)
--	[`11`](https://github.com/korpx-z/postgres)  [![Build Status](https://travis-ci.com/korpx-z/postgres.svg?branch=11)](https://travis-ci.com/github/korpx-z/postgres)
--	[`10`](https://github.com/korpx-z/postgres)  [![Build Status](https://travis-ci.com/korpx-z/postgres.svg?branch=10)](https://travis-ci.com/github/korpx-z/postgres)
-
-
-# What is PostgreSQL?
-
+<br />
 PostgreSQL, often simply "Postgres", is an object-relational database management system (ORDBMS) with an emphasis on extensibility and standards-compliance. As a database server, its primary function is to store data, securely and supporting best practices, and retrieve it later. It can handle workloads ranging from small single-machine applications to large Internet-facing applications with many concurrent users. Recent versions also provide replication of the database itself for security and scalability.
 
 > [wikipedia.org/wiki/PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL)
@@ -17,7 +16,7 @@ PostgreSQL, often simply "Postgres", is an object-relational database management
 **start a postgres instance**
 
 ```console
-$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/ibmz/postgres:xx
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/ibm/postgres:xx
 ```
 
 The default `postgres` user and database are created in the entrypoint with `initdb`.
@@ -90,7 +89,7 @@ $ docker run -d \
 	-e POSTGRES_PASSWORD=mysecretpassword \
 	-e PGDATA=/var/lib/postgresql/data/pgdata \
 	-v <your_volume>:/var/lib/postgresql/data \
-	quay.io/ibmz/postgres:xx
+	quay.io/ibm/postgres:xx
 ```
 
 This is an environment variable that is not Docker specific. Because the variable is used by the `postgres` server binary (see the [PostgreSQL docs](https://www.postgresql.org/docs/11/app-postgres.html#id-1.9.5.14.7)), the entrypoint script takes it into account.
@@ -122,7 +121,7 @@ $ ls
 run/
 ```
 ```console
-$ docker run -d --rm --name temp -v <your_volume>:/root/ quay.io/ibmz/alpine:3.12 tail -f /dev/null
+$ docker run -d --rm --name temp -v <your_volume>:/root/ quay.io/ibm/alpine:3.12 tail -f /dev/null
 $ docker cp run/. temp:/root
 $ docker stop temp
 ```
@@ -142,14 +141,14 @@ Currently, this is only supported for `POSTGRES_INITDB_ARGS`, `POSTGRES_PASSWORD
 
 Create a volume, create a data directory, mount this volume in a temporary container to fill with contents from host (/data/*). Content should persist.
 ```console
-$ docker run -d --rm --name temp -v <your_volume>:/root/ quay.io/ibmz/alpine:3.12 tail -f /dev/null
+$ docker run -d --rm --name temp -v <your_volume>:/root/ quay.io/ibm/alpine:3.12 tail -f /dev/null
 $ docker cp data/. temp:/root
 $ docker stop temp
 ```
 Start your `postgres` container like this:
 
 ```console
-$ docker run --name some-postgres -v <your_volume>:/var/lib/postgresql/data -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/ibmz/postgres:xx
+$ docker run --name some-postgres -v <your_volume>:/var/lib/postgresql/data -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/ibm/postgres:xx
 ```
 
 The `-v <your_volume>:/var/lib/postgresql/data` part of the command mounts your (volume)data directory from the underlying host system as `/var/lib/postgresql/data` inside the container, where PostgreSQL by default will write its data files.
@@ -181,11 +180,11 @@ These initialization files will be executed in sorted name order as defined by t
 The main caveat to note is that `postgres` doesn't care what UID it runs as (as long as the owner of `/var/lib/postgresql/data` matches), but `initdb` *does* care (and needs the user to exist in `/etc/passwd`):
 
 ```console
-$ docker run -it --rm --user www-data -e POSTGRES_PASSWORD=mysecretpassword quay.io/ibmz/postgres:xx
+$ docker run -it --rm --user www-data -e POSTGRES_PASSWORD=mysecretpassword quay.io/ibm/postgres:xx
 The files belonging to this database system will be owned by user "www-data".
 ...
 
-$ docker run -it --rm --user 1000:1000 -e POSTGRES_PASSWORD=mysecretpassword quay.io/ibmz/postgres:xx
+$ docker run -it --rm --user 1000:1000 -e POSTGRES_PASSWORD=mysecretpassword quay.io/ibm/postgres:xx
 initdb: could not look up effective user ID 1000: user does not exist
 ```
 # License
