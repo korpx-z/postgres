@@ -1,4 +1,4 @@
-###This image is built to run on s390x architecture
+### This image is built to run on s390x architecture
 -    [build source](https://github.com/korpx-z/postgres)
 -    [original source code](https://github.com/docker-library/postgres)
 ###Tags
